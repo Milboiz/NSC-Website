@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neighborhood Sports Club · Oakland, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3f8fd;--white:#ffffff;--sky:#dcebfa;--sky-2:#c4ddf5;
+    --blue:#2f7fd6;--blue-deep:#1f5fa8;--navy:#12283f;--navy-2:#1d3a57;
+    --ink:#132a40;--muted:#5d7790;--line:rgba(19,42,64,.14);--maxw:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:"Archivo",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;overflow-x:hidden}
+  ::selection{background:var(--blue);color:#fff}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .anton{font-family:"Anton",Impact,sans-serif;font-weight:400;letter-spacing:.01em;line-height:.92;text-transform:uppercase}
+  .mono{font-family:"Space Mono",monospace}
+  .eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:"Archivo";font-weight:700;font-size:13.5px;
+    letter-spacing:.06em;text-transform:uppercase;padding:14px 26px;border-radius:4px;cursor:pointer;
+    border:2px solid transparent;transition:transform .18s,background .18s,color .18s,border-color .18s}
+  .btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .btn-blue{background:var(--blue);color:#fff}
+  .btn-blue:hover{background:var(--blue-deep);transform:translateY(-2px)}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{transform:translateY(-2px);background:#0a1a2c}
+  .btn-out{border-color:currentColor}
+  .btn-out:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-2px)}
+  .btn-out.light{color:#fff}
+  .btn-out.light:hover{background:#fff;color:var(--navy);border-color:#fff}
+
+  /* NAV */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .3s,box-shadow .3s,padding .3s;padding:18px 0}
+  header.nav.solid{background:var(--navy);box-shadow:0 8px 30px rgba(10,26,44,.28);padding:11px 0}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .logo{display:flex;align-items:center;gap:12px;color:#fff}
+  .logo img{height:34px;width:auto;filter:brightness(0) invert(1)}
+  .logo .lk{font-family:"Anton";font-size:18px;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;max-width:200px}
+  .navlinks{display:flex;align-items:center;gap:34px}
+  .navlinks a{color:#fff;font-weight:600;font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;position:relative;padding:4px 0}
+  .navlinks a::after{content:"";position:absolute;left:0;bottom:-3px;height:2px;width:0;background:#fff;transition:width .22s}
+  .navlinks a:hover::after{width:100%}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .cart-btn{display:flex;align-items:center;gap:9px;color:#fff;background:none;border:none;cursor:pointer;font-family:"Space Mono";font-size:13px;letter-spacing:.05em}
+  .cart-btn svg{width:22px;height:22px;fill:#fff}
+  .cart-count{background:var(--blue);color:#fff;font-family:"Space Mono";font-weight:700;font-size:11px;min-width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0 5px}
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+  .burger span{width:26px;height:2px;background:#fff;display:block}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+  .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,26,44,.45),rgba(10,26,44,.15) 38%,rgba(10,26,44,.45) 70%,rgba(10,26,44,.92))}
+  .hero-in{position:relative;width:100%;padding:150px 0 56px}
+  .hero .eyebrow{color:#bfe0ff;margin-bottom:20px}
+  .hero h1{font-size:clamp(52px,11vw,150px);max-width:12ch;margin-bottom:22px}
+  .hero h1 span{color:#7cc0ff}
+  .hero p{max-width:46ch;font-size:clamp(16px,2vw,19px);color:#eaf4ff}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+
+  /* MARQUEE */
+  .marq{background:var(--blue);color:#fff;overflow:hidden;padding:13px 0;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+  .marq-t{display:flex;width:max-content;white-space:nowrap;animation:scroll 24s linear infinite}
+  .marq-t span{font-family:"Anton";font-size:20px;text-transform:uppercase;letter-spacing:.04em;padding:0 22px;display:inline-flex;align-items:center;gap:22px}
+  .marq-t span::after{content:"✺";font-size:15px}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  .sec{padding:110px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(40px,7vw,96px)}
+  .sec-head .eyebrow{color:var(--blue);display:block;margin-bottom:14px}
+  .sec-head .lead{max-width:38ch;color:var(--muted);font-size:15.5px}
+
+  /* PLAY */
+  .play{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .play .sec-head h2{color:#fff}
+  .play .sec-head .eyebrow{color:#7cc0ff}
+  .play .sec-head .lead{color:#aac4dd}
+  .ptypes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:64px}
+  .ptype{border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:26px;display:flex;flex-direction:column;gap:12px;background:rgba(255,255,255,.04)}
+  .ptype .tag{font-family:"Space Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7cc0ff}
+  .ptype h3{font-family:"Anton";font-size:30px;text-transform:uppercase;line-height:1}
+  .ptype p{font-size:14px;color:#aac4dd;flex:1}
+  .ptype .price{font-family:"Space Mono";font-weight:700;font-size:14px;color:#fff}
+  .ptype .btn{align-self:flex-start;padding:11px 22px;font-size:12px}
+
+  .board-title{font-family:"Space Mono";font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#7cc0ff;margin-bottom:8px}
+  .board-sub{font-family:"Space Mono";font-size:13px;color:#aac4dd;margin-bottom:28px}
+  .board-sub a{color:#7cc0ff;border-bottom:1px solid currentColor}
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;border-top:2px solid var(--blue);padding-top:24px}
+  .col h4{font-family:"Anton";font-size:22px;text-transform:uppercase;letter-spacing:.02em;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.18)}
+  .slot{display:block;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:4px;padding:11px 12px;margin-bottom:10px;transition:border-color .2s,background .2s}
+  .slot:hover{border-color:#7cc0ff;background:rgba(47,127,214,.22)}
+  .slot .nm{font-weight:700;font-size:13px;line-height:1.25;text-transform:uppercase;letter-spacing:.01em}
+  .slot .tm{font-family:"Space Mono";font-size:11.5px;color:#aac4dd;margin-top:5px}
+  .slot.women .nm{color:#9ad0ff}
+  .slot.league{border-left:3px solid var(--blue)}
+  .board-foot{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;align-items:center}
+  .board-foot .note{font-family:"Space Mono";font-size:12px;color:#88a4c0}
+
+  /* SHOP */
+  .shop{background:var(--bg)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .prod{background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+  .prod:hover{transform:translateY(-5px);box-shadow:0 20px 40px -22px rgba(19,42,64,.35)}
+  .prod .ph{aspect-ratio:1/1;overflow:hidden;background:var(--sky);position:relative}
+  .prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .prod:hover .ph img{transform:scale(1.05)}
+  .prod .sold{position:absolute;top:12px;left:12px;background:var(--navy);color:#fff;font-family:"Space Mono";font-size:10px;font-weight:700;letter-spacing:.12em;padding:5px 10px;text-transform:uppercase}
+  .prod .body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .prod h3{font-family:"Archivo";font-weight:700;font-size:14.5px;letter-spacing:.02em;text-transform:uppercase;line-height:1.25}
+  .prod .price{font-family:"Space Mono";font-weight:700;font-size:15px;color:var(--blue-deep)}
+  .prod .add{margin-top:auto;width:100%;justify-content:center;padding:11px;font-size:12px}
+  .prod .add.disabled{background:transparent;color:var(--muted);border:2px solid var(--line);cursor:not-allowed}
+  .shop-all{text-align:center;margin-top:44px}
+
+  /* JOIN BAND */
+  .band{background:var(--blue);color:#fff;text-align:center;padding:96px 0}
+  .band .eyebrow{color:rgba(255,255,255,.85);margin-bottom:18px}
+  .band h2{font-size:clamp(38px,6vw,84px);margin-bottom:18px}
+  .band p{max-width:46ch;margin:0 auto 30px;font-size:17px}
+  .band-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:#a9c2d9;padding:78px 0 36px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.14)}
+  .foot-brand img{height:40px;width:auto;filter:brightness(0) invert(1);margin-bottom:14px}
+  .foot-brand .lk{font-family:"Anton";font-size:24px;color:#fff;text-transform:uppercase;line-height:1.05;margin:6px 0 14px;max-width:13ch}
+  .foot-brand p{font-size:14px;max-width:32ch}
+  footer h5{font-family:"Space Mono";font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7cc0ff;margin-bottom:16px}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px;font-size:14px}
+  footer ul li a:hover{color:#fff}
+  .news{display:flex;gap:8px;margin-top:14px}
+  .news input{flex:1;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:11px 12px;font-family:"Archivo";font-size:13px;border-radius:4px}
+  .news input::placeholder{color:#7e98b2}
+  .news button{background:var(--blue);border:none;color:#fff;padding:0 16px;cursor:pointer;font-family:"Space Mono";font-weight:700;font-size:12px;border-radius:4px}
+  .foot-bot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:24px;font-family:"Space Mono";font-size:12px;flex-wrap:wrap}
+
+  /* CART */
+  .scrim{position:fixed;inset:0;background:rgba(10,26,44,.5);opacity:0;visibility:hidden;transition:.3s;z-index:90}
+  .scrim.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:90vw;background:var(--white);z-index:91;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(10,26,44,.22)}
+  .drawer.open{transform:none}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:2px solid var(--navy)}
+  .drawer-head h3{font-family:"Anton";font-size:24px;text-transform:uppercase}
+  .drawer-head button{background:none;border:none;font-size:26px;cursor:pointer;line-height:1;color:var(--navy)}
+  .drawer-body{flex:1;overflow-y:auto;padding:8px 24px}
+  .ci{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .ci img{width:66px;height:66px;object-fit:cover;border-radius:4px;background:var(--sky)}
+  .ci .info{flex:1}
+  .ci .info h4{font-family:"Archivo";font-weight:700;font-size:13px;text-transform:uppercase;line-height:1.3}
+  .ci .info .pr{font-family:"Space Mono";font-size:13px;color:var(--blue-deep);margin-top:4px}
+  .ci .qty{display:flex;align-items:center;gap:10px;margin-top:8px;font-family:"Space Mono";font-size:13px}
+  .ci .qty button{width:24px;height:24px;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-size:15px;line-height:1;border-radius:4px}
+  .ci .rm{background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;text-decoration:underline;align-self:flex-start;margin-top:6px}
+  .empty{text-align:center;color:var(--muted);padding:60px 20px;font-family:"Space Mono";font-size:14px}
+  .drawer-foot{padding:22px 24px;border-top:2px solid var(--navy)}
+  .subtotal{display:flex;justify-content:space-between;font-family:"Space Mono";font-weight:700;font-size:16px;margin-bottom:16px}
+  .drawer-foot .btn{width:100%;justify-content:center}
+  .drawer-foot .ship{text-align:center;font-family:"Space Mono";font-size:11px;color:var(--muted);margin-top:10px}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:1040px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .ptypes{grid-template-columns:1fr}
+    .week{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:720px){
+    .wrap{padding:0 20px}
+    .navlinks{display:none}
+    .burger{display:flex}
+    .week{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .hero video{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">
+      <img src="https://neighborhoodsc.com/cdn/shop/t/1/assets/NSC_Web-Flower_small.png?v=121231353833623322341778732882" alt="NSC flower logo" onerror="this.style.display='none'">
+      <span class="lk">Neighborhood<br>Sports Club</span>
+    </a>
+    <nav class="navlinks">
+      <a href="#play">Play</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#shop">Shop</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+        <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12L8.1 13h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1.003 1.003 0 0020 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>Cart</span><span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <video autoplay muted loop playsinline
+    poster="https://neighborhoodsc.com/cdn/shop/files/preview_images/e372f2188a2145949fb1a71e59d784f6.thumbnail.0000000000_small.jpg?v=1777662334">
+    <source src="https://neighborhoodsc.com/cdn/shop/videos/c/vp/e372f2188a2145949fb1a71e59d784f6/e372f2188a2145949fb1a71e59d784f6.HD-720p-1.6Mbps-83187860.mp4?v=0" type="video/mp4">
+  </video>
+  <img class="poster" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1600&q=80" alt="" aria-hidden="true" style="z-index:-1">
+  <div class="overlay"></div>
+  <div class="wrap hero-in reveal">
+    <p class="eyebrow">Oakland, CA · 100 2nd Street</p>
+    <h1 class="anton">Play the <span>beautiful game.</span></h1>
+    <p>Drop-in 5v5 pickup, leagues, and a community built around football. All levels welcome — just show up and play.</p>
+    <div class="hero-cta">
+      <a class="btn btn-blue" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener">Book a session</a>
+      <a class="btn btn-out light" href="#schedule">See the schedule</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq" aria-hidden="true">
+  <div class="marq-t">
+    <span>Pickup 5v5</span><span>Leagues</span><span>All Levels</span><span>$10 a session</span><span>Oakland</span>
+    <span>Pickup 5v5</span><span>Leagues</span><span>All Levels</span><span>$10 a session</span><span>Oakland</span>
+  </div>
+</div>
+
+<!-- PLAY -->
+<section class="sec play" id="play">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">01 / Play</span>
+        <h2 class="anton">Get on the pitch</h2>
+      </div>
+      <p class="lead">A two-hour window of rotating 5v5. Individuals welcome, teams mix and match — quick, small-sided matches that keep the tempo high.</p>
+    </div>
+
+    <div class="ptypes reveal">
+      <div class="ptype">
+        <span class="tag">Drop-in</span>
+        <h3>Pickup</h3>
+        <p>Rotating 5v5, all levels. A great place to connect, compete, and enjoy the game. Individuals welcome.</p>
+        <span class="price">$10 / session</span>
+        <a class="btn btn-blue" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener">Book pickup</a>
+      </div>
+      <div class="ptype">
+        <span class="tag">Seasonal · Next kickoff July 2026</span>
+        <h3>Leagues</h3>
+        <p>Three tiers — Champions (competitive), Community (relaxed), and Neighborhood (beginner). Min. 10 matchdays. Teams &amp; free agents.</p>
+        <span class="price">Team &amp; free-agent spots</span>
+        <a class="btn btn-out light" href="https://app.sportninja.com/registration/eIt5ockyjvkQlrrT" target="_blank" rel="noopener">Join a league</a>
+      </div>
+      <div class="ptype">
+        <span class="tag">Make it routine</span>
+        <h3>Membership</h3>
+        <p>For players who want the club to be part of their week — pickup, training, and priority booking, built around how you play.</p>
+        <span class="price">$60 – $150</span>
+        <a class="btn btn-out light" href="https://playnsc.gymdesk.com/pricing" target="_blank" rel="noopener">View memberships</a>
+      </div>
+    </div>
+
+    <!-- WEEKLY BOARD -->
+    <div id="schedule" class="reveal">
+      <div class="board-title">Weekly Schedule</div>
+      <div class="board-sub">100 2nd St, Oakland, CA 94607 · Live availability on the <a href="https://playnsc.gymdesk.com/schedule" target="_blank" rel="noopener">calendar ↗</a></div>
+      <div class="week">
+        <div class="col">
+          <h4>Mon</h4>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Tue</h4>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">9:00–11:00 AM</div></a>
+          <a class="slot league" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Community League Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Wed</h4>
+          <a class="slot league" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Champions League Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Thu</h4>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">9:00–11:00 AM</div></a>
+          <a class="slot league" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Neighborhood League Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Fri</h4>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">7:00–9:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Sat</h4>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">10:00 AM–12:00 PM</div></a>
+        </div>
+        <div class="col">
+          <h4>Sun</h4>
+          <a class="slot women" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Women's Pickup</div><div class="tm">9:00–11:00 AM</div></a>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Intro to Football</div><div class="tm">11:00 AM–12:30 PM</div></a>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Over-35 Pickup</div><div class="tm">3:00–5:00 PM</div></a>
+          <a class="slot" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener"><div class="nm">Pickup</div><div class="tm">5:00–7:00 PM</div></a>
+        </div>
+      </div>
+      <div class="board-foot">
+        <a class="btn btn-blue" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener">Book a session ↗</a>
+        <span class="note">$10 entry · 5v5 · all levels welcome</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section class="sec shop" id="shop">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">02 / Shop</span>
+        <h2 class="anton">The Kit</h2>
+      </div>
+      <p class="lead">Match kits, hoodies, tees and workwear — made in small runs, designed in Oakland.</p>
+    </div>
+    <div class="grid" id="productGrid"></div>
+    <div class="shop-all reveal"><a class="btn btn-navy" href="https://neighborhoodsc.com/collections/all" target="_blank" rel="noopener">Shop all products ↗</a></div>
+  </div>
+</section>
+
+<!-- JOIN BAND -->
+<section class="band">
+  <div class="wrap reveal">
+    <p class="eyebrow">All levels · Individuals & teams</p>
+    <h2 class="anton">Just show up</h2>
+    <p>Book your first 5v5 session for $10, or come back every week as a member. The pitch is waiting.</p>
+    <div class="band-cta">
+      <a class="btn btn-navy" href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener">Book pickup ↗</a>
+      <a class="btn btn-out light" href="https://playnsc.gymdesk.com/pricing" target="_blank" rel="noopener">Memberships</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="https://neighborhoodsc.com/cdn/shop/t/1/assets/NSC_Web-Flower_small.png?v=121231353833623322341778732882" alt="NSC flower logo" onerror="this.style.display='none'">
+        <div class="lk">Neighborhood Sports Club</div>
+        <p>Football, leagues &amp; pickup in Oakland, California.</p>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <ul>
+          <li>100 2nd St</li>
+          <li>Oakland, CA 94607</li>
+          <li><a href="https://maps.app.goo.gl/mmT3DzqxWrc97FqH6" target="_blank" rel="noopener">Directions ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Play</h5>
+        <ul>
+          <li><a href="https://playnsc.gymdesk.com/book" target="_blank" rel="noopener">Book pickup</a></li>
+          <li><a href="https://playnsc.gymdesk.com/schedule" target="_blank" rel="noopener">Full calendar</a></li>
+          <li><a href="https://app.sportninja.com/registration/eIt5ockyjvkQlrrT" target="_blank" rel="noopener">Leagues</a></li>
+          <li><a href="https://playnsc.gymdesk.com/pricing" target="_blank" rel="noopener">Memberships</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Newsletter</h5>
+        <p style="font-size:14px">Fixtures, league news &amp; kit drops.</p>
+        <div class="news">
+          <input type="email" placeholder="you@email.com" aria-label="Email">
+          <button onclick="this.previousElementSibling.value='';this.textContent='✓'">Join</button>
+        </div>
+        <ul style="margin-top:18px">
+          <li><a href="https://www.instagram.com/neighborhoodsportsclub/" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="https://www.youtube.com/@neighborhoodsportsclub8473" target="_blank" rel="noopener">YouTube ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Neighborhood Sports Club</span>
+      <span>Oakland, CA · ✺</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head"><h3>Your Cart</h3><button id="cartClose" aria-label="Close cart">×</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <button class="btn btn-blue" id="checkout">Checkout</button>
+    <div class="ship">Shipping &amp; taxes calculated at checkout</div>
+  </div>
+</aside>
+
+<script>
+  const CDN='https://neighborhoodsc.com/cdn/shop/files/';
+  const FALLBACK='https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&q=80';
+  const products=[
+    {id:1,name:'Three Flower Workwear Jacket (Brown)',price:148,img:'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80'},
+    {id:2,name:'"Cafe Olé" Crewneck (Coffee Brown)',price:75,img:CDN+'3_c5b81636-7824-48fe-ac20-2c04a024fe63.png?width=600'},
+    {id:3,name:'Three Flower Zip-Up Hoodie',price:85,img:'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80'},
+    {id:4,name:'"Henry" Hoodie (Black)',price:80,img:CDN+'9.png?width=600'},
+    {id:5,name:'"Henry" Tee (Vintage Black)',price:50,img:CDN+'1_dd31d908-6d5e-4921-923f-d0955f4695f5.png?width=600'},
+    {id:6,name:'"Tour de la Bay" Kit',price:85,img:CDN+'3.png?width=600'},
+    {id:7,name:'Flower Logo Cap (Brown)',price:40,img:'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600&q=80',soldOut:true},
+    {id:8,name:'Club Scarf (Cream)',price:45,img:'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&q=80'}
+  ];
+
+  const grid=document.getElementById('productGrid');
+  products.forEach(p=>{
+    const el=document.createElement('article');el.className='prod reveal';
+    el.innerHTML=`
+      <div class="ph">${p.soldOut?'<span class="sold">Sold out</span>':''}<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'"></div>
+      <div class="body">
+        <h3>${p.name}</h3>
+        <span class="price">$${p.price.toFixed(2)}</span>
+        ${p.soldOut?'<button class="btn add disabled" disabled>Sold out</button>':`<button class="btn btn-navy add" data-id="${p.id}">Add to cart</button>`}
+      </div>`;
+    grid.appendChild(el);
+  });
+
+  let cart={};
+  const cartBody=document.getElementById('cartBody'),cartCount=document.getElementById('cartCount'),
+        subtotalEl=document.getElementById('subtotal'),drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+  const openCart=()=>{drawer.classList.add('open');scrim.classList.add('open')};
+  const closeCart=()=>{drawer.classList.remove('open');scrim.classList.remove('open')};
+  document.getElementById('cartOpen').onclick=openCart;
+  document.getElementById('cartClose').onclick=closeCart;
+  scrim.onclick=closeCart;
+
+  function addToCart(id){cart[id]=(cart[id]||0)+1;renderCart();openCart()}
+  function changeQty(id,d){cart[id]+=d;if(cart[id]<=0)delete cart[id];renderCart()}
+  function removeItem(id){delete cart[id];renderCart()}
+
+  function renderCart(){
+    const ids=Object.keys(cart);let total=0;
+    if(!ids.length){cartBody.innerHTML='<div class="empty">Your cart is empty.<br>Go grab some kit ✺</div>';}
+    else{
+      cartBody.innerHTML=ids.map(id=>{
+        const p=products.find(x=>x.id==id),q=cart[id];total+=p.price*q;
+        return `<div class="ci"><img src="${p.img}" alt="${p.name}" onerror="this.onerror=null;this.src='${FALLBACK}'">
+          <div class="info"><h4>${p.name}</h4><div class="pr">$${p.price.toFixed(2)}</div>
+          <div class="qty"><button onclick="changeQty(${id},-1)">−</button><span>${q}</span><button onclick="changeQty(${id},1)">+</button></div></div>
+          <button class="rm" onclick="removeItem(${id})">Remove</button></div>`;
+      }).join('');
+    }
+    cartCount.textContent=ids.reduce((s,id)=>s+cart[id],0);
+    subtotalEl.textContent='$'+total.toFixed(2);
+  }
+  renderCart();
+  grid.addEventListener('click',e=>{const b=e.target.closest('.add:not(.disabled)');if(b)addToCart(parseInt(b.dataset.id))});
+  document.getElementById('checkout').onclick=()=>{
+    const n=Object.values(cart).reduce((s,q)=>s+q,0);
+    if(!n){alert('Your cart is empty — add some kit first.');return;}
+    alert('Demo checkout — in the live build this hands off to a secure Shopify checkout.');
+  };
+
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('solid',window.scrollY>40);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  document.getElementById('burger').onclick=()=>document.getElementById('schedule').scrollIntoView({behavior:'smooth'});
+
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
